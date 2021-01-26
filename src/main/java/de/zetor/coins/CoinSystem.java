@@ -1,4 +1,6 @@
 package de.zetor.coins;
 
-public class CoinSystem {
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class CoinSystem extends JavaPlugin {
 }
