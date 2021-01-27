@@ -14,7 +14,8 @@ import java.util.UUID;
 public class BankLog {
 
     private String bankID;
-    private UUID uuid;
+    private String uuid;
     private String logMSG;
+    private long time;
 
 }

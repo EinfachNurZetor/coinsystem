@@ -4,6 +4,7 @@ import de.zetor.coins.CoinSystem;
 import de.zetor.coins.Messages;
 import de.zetor.coins.managers.BankAccountManager;
 import de.zetor.coins.managers.BankGUI;
+import de.zetor.coins.managers.InterestManager;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -20,10 +21,12 @@ public class BankCommand implements CommandExecutor {
 
     private BankAccountManager bankAccountManager;
     private BankGUI bankGUI;
+    private InterestManager interestManager;
 
     public BankCommand(CoinSystem coinSystem) {
         this.bankAccountManager = coinSystem.getBankAccountManager();
         this.bankGUI = coinSystem.getBankGUI();
+        this.interestManager = coinSystem.getInterestManager();
         coinSystem.getCommand("bank").setExecutor(this);
     }
 
@@ -32,16 +35,14 @@ public class BankCommand implements CommandExecutor {
         if (sender instanceof Player){
             Player p = (Player) sender;
             if (args.length == 1){
-                if (args[0].equalsIgnoreCase("create")){
-                    bankAccountManager.createBankAccount(p);
-                }if (args[0].equalsIgnoreCase("open")){
+                if (args[0].equalsIgnoreCase("open")){
                     bankGUI.openBankGUI(p);
                 }
             }else if (args.length == 2){
                 if (args[0].equalsIgnoreCase("give")){
-                    p.getInventory().addItem(bankAccountManager.createItem(Material.GOLD_NUGGET, Messages.COIN_NAME, false, Integer.parseInt(args[1]), ""));
-                }else if (args[0].equalsIgnoreCase("pay")){
-                    bankAccountManager.payAllToBankAccount(args[1], p);
+                    if (p.isOp()){
+                        p.getInventory().addItem(bankAccountManager.createItem(Material.GOLD_NUGGET, Messages.COIN_NAME, false, Integer.parseInt(args[1]), ""));
+                    }
                 }
             }
         }
