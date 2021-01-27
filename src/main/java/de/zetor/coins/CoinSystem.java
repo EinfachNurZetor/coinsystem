@@ -1,26 +1,39 @@
 package de.zetor.coins;
 
+import com.google.gson.Gson;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import de.zetor.coins.commands.BankCommand;
+import de.zetor.coins.listeners.InventoryClick;
+import de.zetor.coins.managers.BankAccountManager;
+import de.zetor.coins.managers.BankGUI;
+import lombok.Getter;
 import lombok.SneakyThrows;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.net.UnknownHostException;
 
+@Getter
 public class CoinSystem extends JavaPlugin {
 
-    private static CoinSystem instance;
+    private static MongoClientURI uri = new MongoClientURI("mongodb+srv://zetor:So88pnSu1IIfwo92@cluster0.fhyc1.mongodb.net/test?retryWrites=true&w=majority");
 
-    public static MongoClientURI uri = new MongoClientURI("mongodb+srv://zetor:So88pnSu1IIfwo92@cluster0.fhyc1.mongodb.net/test?retryWrites=true&w=majority");
-    public static MongoClient mongoClient;
+    private MongoClient mongoClient;
+    private Gson gson;
 
-    @SneakyThrows(UnknownHostException.class)
+    private BankAccountManager bankAccountManager;
+    private BankGUI bankGUI;
+    private InventoryClick inventoryClick;
+
     @Override
     public void onEnable() {
-        instance = this;
-
         mongoClient = new MongoClient(uri);
-    }
+        this.gson = new Gson();
 
-    public static CoinSystem getInstance() { return instance; }
+        this.bankAccountManager = new BankAccountManager(this);
+        this.bankGUI = new BankGUI(this);
+        this.inventoryClick = new InventoryClick(this);
+
+        new BankCommand(this);
+    }
 }
