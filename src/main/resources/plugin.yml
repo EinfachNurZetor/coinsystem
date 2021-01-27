@@ -1,0 +1,8 @@
+name: Bank
+version: 1.0
+main: de.zetor.coins.CoinSystem
+author: Zetor
+description: Bank Plugin
+api-version: 1.16
+commands:
+  bank:
