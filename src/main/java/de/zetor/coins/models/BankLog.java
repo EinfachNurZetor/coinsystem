@@ -11,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Setter
 @Getter
-public class bankLog {
+public class BankLog {
 
     private String bankID;
     private UUID uuid;
