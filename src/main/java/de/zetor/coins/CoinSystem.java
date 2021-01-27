@@ -18,7 +18,7 @@ import java.net.UnknownHostException;
 @Getter
 public class CoinSystem extends JavaPlugin {
 
-    private static MongoClientURI uri = new MongoClientURI("mongodb+srv://zetor:So88pnSu1IIfwo92@cluster0.fhyc1.mongodb.net/test?retryWrites=true&w=majority");
+    private static MongoClientURI uri = new MongoClientURI("mongodb+srv://zetor:********@cluster0.fhyc1.mongodb.net/test?retryWrites=true&w=majority");
 
     private MongoClient mongoClient;
     private Gson gson;
