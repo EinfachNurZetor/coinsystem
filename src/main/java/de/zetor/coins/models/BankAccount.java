@@ -8,11 +8,11 @@ import java.util.UUID;
 @AllArgsConstructor
 @Setter
 @Getter
-public class bankAccount {
+public class BankAccount {
 
     private String bankID;
-    private UUID uuid;
+    private String uuid;
     private String bankname;
-    private Integer coins;
+    private int coins;
 
 }
